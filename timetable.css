@@ -9,6 +9,15 @@
   box-sizing: border-box;
 }
 
+::selection {
+  color: white;
+  background-color: var(--hal);
+}
+
+a {
+  text-decoration: none;
+}
+
 body {
   color: var(--hal);
   font-family: "IBM Plex Sans JP", "Yu Gothic", sans-serif;
@@ -198,4 +207,26 @@ body {
   .timetable tbody th {
     min-width: 4rem;
   }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  height: 0.75rem;
+  filter: grayscale(100%) opacity(50%);;
+  margin-right: 0.5rem;
+}
+
+footer p {
+  text-align: center;
+  color: var(--hal-dim);
+  font-size: 0.75rem;
+}
+
+footer a {
+  color: var(--hal-dim);
 }
