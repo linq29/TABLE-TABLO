@@ -1,0 +1,201 @@
+:root {
+  --hal: #175bc7;
+  --fill: #0fa3df;
+  --hal-dim: #abb8c3;
+  --black: #1c1c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--hal);
+  font-family: "IBM Plex Sans JP", "Yu Gothic", sans-serif;
+  padding: 1rem;
+}
+
+.sheet {
+  width: 1000px;
+  margin: 1rem auto;
+}
+
+.sheet-header {
+  text-align: left;
+  padding-bottom: 14px;
+  font-weight: 700;
+}
+
+.sheet-title {
+  font-size: 2rem;
+  background: linear-gradient(97deg, #175bc7 4%, #db13e0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sheet-meta {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sheet-meta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.5rem;
+  background: linear-gradient(180deg, #175bc7 4%, #db13e0);
+}
+
+.timetable {
+  border-collapse: collapse;
+  /* table-layout: fixed; */
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.timetable th,
+.timetable td {
+  border: 1px solid var(--hal);
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem;
+}
+
+.timetable thead th {
+  color: var(--hal);
+  font-size: 1rem;
+}
+
+.period-col,
+.timetable tbody th {
+  width: 4rem;
+}
+
+.timetable tbody th {
+  color: var(--hal);
+}
+
+.timetable tbody tr {
+  height: 96px;
+}
+
+.timetable td {
+  min-width: 4em;
+  height: 96px;
+}
+
+.period,
+.time,
+.subject,
+.detail {
+  display: block;
+}
+
+.period,
+.time {
+  text-align: center;
+  margin: auto;
+  width: fit-content;
+  padding-inline: 1rem;
+}
+
+.period {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.time {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--hal-dim);
+}
+
+.lesson {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+}
+
+.timetable td[rowspan="2"] > .lesson {
+  min-height: 172px;
+}
+
+.subject {
+  color: var(--hal);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.detail {
+  color: var(--hal);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.lesson .detail {
+  margin-top: 0;
+}
+
+.notes {
+  margin-top: 14px;
+  padding: 14px 18px 18px;
+  color: var(--hal-dim);
+}
+
+.notes h2 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.notes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notes li {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  font-weight: 700;
+}
+
+.note-code {
+  min-width: 4rem;
+}
+
+.note-text,
+.note-pwd {
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .sheet-meta {
+    white-space: normal;
+  }
+
+  .timetable {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .timetable th,
+  .timetable td {
+    min-width: 6rem;
+  }
+
+  .period-col,
+  .timetable tbody th {
+    min-width: 4rem;
+  }
+}
