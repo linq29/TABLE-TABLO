@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "academicYear": 2026,
+  "constraints": {
+    "coursePeriodSpan": {
+      "min": 1,
+      "max": 2
+    }
+  },
+  "weekdays": [
+    {
+      "id": "mon",
+      "label": "月"
+    },
+    {
+      "id": "tue",
+      "label": "火"
+    },
+    {
+      "id": "wed",
+      "label": "水"
+    },
+    {
+      "id": "thu",
+      "label": "木"
+    },
+    {
+      "id": "fri",
+      "label": "金"
+    },
+    {
+      "id": "sat",
+      "label": "土"
+    }
+  ],
+  "periods": [
+    {
+      "id": 1,
+      "label": "1限",
+      "start": "09:30",
+      "end": "11:00",
+      "durationMinutes": 90
+    },
+    {
+      "id": 2,
+      "label": "2限",
+      "start": "11:10",
+      "end": "12:40",
+      "durationMinutes": 90
+    },
+    {
+      "id": 3,
+      "label": "3限",
+      "start": "12:50",
+      "end": "14:20",
+      "durationMinutes": 90
+    },
+    {
+      "id": 4,
+      "label": "4限",
+      "start": "14:30",
+      "end": "16:00",
+      "durationMinutes": 90
+    },
+    {
+      "id": 5,
+      "label": "5限",
+      "start": "16:10",
+      "end": "17:40",
+      "durationMinutes": 90
+    },
+    {
+      "id": 6,
+      "label": "6限",
+      "start": "17:50",
+      "end": "19:20",
+      "durationMinutes": 90
+    }
+  ],
+  "courses": [
+    {
+      "id": "FX29",
+      "label": "FX29"
+    },
+    {
+      "id": "IH29",
+      "label": "IH29"
+    },
+    {
+      "id": "IO29",
+      "label": "IO29"
+    },
+    {
+      "id": "IP3S",
+      "label": "IP3S"
+    },
+    {
+      "id": "JV29",
+      "label": "JV29"
+    },
+    {
+      "id": "NT29",
+      "label": "NT29"
+    },
+    {
+      "id": "SK29",
+      "label": "SK29"
+    },
+    {
+      "id": "ST29",
+      "label": "ST29"
+    }
+  ],
+  "timetables": [
+    {
+      "id": "IH",
+      "label": "IH",
+      "entries": []
+    },
+    {
+      "id": "PI",
+      "label": "PI",
+      "entries": [
+        {
+          "weekday": "mon",
+          "period": 3,
+          "span": 2,
+          "courseId": "NT29",
+          "room": "246"
+        },
+        {
+          "weekday": "tue",
+          "period": 3,
+          "span": 1,
+          "courseId": "IP3S",
+          "room": "298"
+        },
+        {
+          "weekday": "tue",
+          "period": 4,
+          "span": 2,
+          "courseId": "IH29",
+          "room": "296"
+        },
+        {
+          "weekday": "wed",
+          "period": 4,
+          "span": 1,
+          "courseId": "SK29",
+          "room": "OL"
+        },
+        {
+          "weekday": "wed",
+          "period": 5,
+          "span": 1,
+          "courseId": "FX29",
+          "room": "OL"
+        },
+        {
+          "weekday": "thu",
+          "period": 1,
+          "span": 2,
+          "courseId": "IH29",
+          "room": "285"
+        },
+        {
+          "weekday": "fri",
+          "period": 1,
+          "span": 2,
+          "courseId": "ST29",
+          "room": "121"
+        },
+        {
+          "weekday": "fri",
+          "period": 4,
+          "span": 2,
+          "courseId": "JV29",
+          "room": "332"
+        }
+      ]
+    },
+    {
+      "id": "PW",
+      "label": "PW",
+      "entries": []
+    }
+  ]
+}
