@@ -20,152 +20,20 @@
       <p><span class="sheet-meta">担任：タカヒロ・ショウコ</span></p>
     </header>
 
+    <div class="timetable-switch">
+      <span class="switch-label">IH</span>
+      <label class="switch-control">
+        <input type="checkbox" id="timetable-toggle" aria-label="IHとPIを切り替え">
+        <span class="switch-track"></span>
+      </label>
+      <span class="switch-label">PI</span>
+    </div>
+
     <table class="timetable">
       <thead>
-        <tr>
-          <th scope="col" class="period-col"></th>
-          <th scope="col">月</th>
-          <th scope="col">火</th>
-          <th scope="col">水</th>
-          <th scope="col">木</th>
-          <th scope="col">金</th>
-          <th scope="col">土</th>
-        </tr>
+        <tr id="timetable-head"></tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">
-            <span class="period">1限</span>
-            <span class="time">09:30<br />11:00</span>
-          </th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td rowspan="2">
-            <div class="lesson">
-              <div class="subject">IH29</div>
-              <div class="detail">285</div>
-            </div>
-          </td>
-          <td rowspan="2">
-            <div class="lesson">
-              <div class="subject">ST29</div>
-              <div class="detail">121</div>
-            </div>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <span class="period">2限</span>
-            <span class="time">11:10<br />12:40</span>
-          </th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <!-- <td>
-            <div class="subject">IH29</div>
-            <div class="detail">285</div>
-          </td> -->
-          <!-- <td>
-            <div class="subject">ST29</div>
-            <div class="detail">121</div>
-          </td> -->
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <span class="period">3限</span>
-            <span class="time">12:50<br />14:20</span>
-          </th>
-          <td rowspan="2">
-            <div class="lesson">
-              <div class="subject">NT29</div>
-              <div class="detail">246</div>
-            </div>
-          </td>
-          <td>
-            <div class="lesson">
-              <div class="subject">IP3S</div>
-              <div class="detail">298</div>
-            </div>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <span class="period">4限</span>
-            <span class="time">14:30<br />16:00</span>
-          </th>
-          <!-- <td>
-            <div class="subject">NT29</div>
-            <div class="detail">246</div>
-          </td> -->
-          <td rowspan="2">
-            <div class="lesson">
-              <div class="subject">IH29</div>
-              <div class="detail">296</div>
-            </div>
-          </td>
-          <td>
-            <div class="lesson">
-              <div class="subject">SK29</div>
-              <div class="detail">OL</div>
-            </div>
-          </td>
-          <td></td>
-          <td rowspan="2">
-            <div class="lesson">
-              <div class="subject">JV29</div>
-              <div class="detail">332</div>
-            </div>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <span class="period">5限</span>
-            <span class="time">16:10<br />17:40</span>
-          </th>
-          <td>
-            <div class="lesson">
-              <div class="subject">IO29</div>
-              <div class="detail">246</div>
-            </div>
-          </td>
-          <!-- <td>
-            <div class="subject">IH29</div>
-            <div class="detail">296</div>
-          </td> -->
-          <td>
-            <div class="lesson">
-              <div class="subject">FX29</div>
-              <div class="detail">OL</div>
-            </div>
-          </td>
-          <td></td>
-          <!-- <td>
-            <div class="subject">JV29</div>
-            <div class="detail">332</div>
-          </td> -->
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <span class="period">6限</span>
-            <span class="time">17:50<br />19:20</span>
-          </th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
+      <tbody id="timetable-body"></tbody>
     </table>
 
     <section class="notes" aria-labelledby="notes-heading">
@@ -184,6 +52,7 @@
   <img src="favicon.png" alt="Icon by Icogenix">
   <p>Icon created by <strong><a href="https://thenounproject.com/creator/asmahameed743/" target="_blank">Icogenix</a></strong> from <strong><a href="https://thenounproject.com/" target="_blank">Noun Project</a></strong>.</p>
   </footer>
+  <script src="main.js" defer></script>
 </body>
 
 </html>

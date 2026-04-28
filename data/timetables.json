@@ -83,12 +83,24 @@
       "label": "FX29"
     },
     {
+      "id": "FX31",
+      "label": "FX31"
+    },
+    {
       "id": "IH29",
       "label": "IH29"
     },
     {
+      "id": "IH31",
+      "label": "IH31"
+    },
+    {
       "id": "IO29",
       "label": "IO29"
+    },
+    {
+      "id": "IO32",
+      "label": "IO32"
     },
     {
       "id": "IP3S",
@@ -99,23 +111,110 @@
       "label": "JV29"
     },
     {
+      "id": "JV31",
+      "label": "JV31"
+    },
+    {
       "id": "NT29",
       "label": "NT29"
+    },
+    {
+      "id": "NT32",
+      "label": "NT32"
     },
     {
       "id": "SK29",
       "label": "SK29"
     },
     {
+      "id": "SK32",
+      "label": "SK32"
+    },
+    {
       "id": "ST29",
       "label": "ST29"
+    },
+    {
+      "id": "ST31",
+      "label": "ST31"
     }
   ],
   "timetables": [
     {
       "id": "IH",
       "label": "IH",
-      "entries": []
+      "entries": [
+        {
+          "weekday": "mon",
+          "period": 3,
+          "span": 2,
+          "courseId": "NT32",
+          "room": "246"
+        },
+        {
+          "weekday": "mon",
+          "period": 5,
+          "span": 1,
+          "courseId": "IO32",
+          "room": "246"
+        },
+        {
+          "weekday": "tue",
+          "period": 3,
+          "span": 1,
+          "courseId": "CS3F",
+          "room": "OL"
+        },
+        {
+          "weekday": "tue",
+          "period": 4,
+          "span": 2,
+          "courseId": "IH31",
+          "room": "OL"
+        },
+        {
+          "weekday": "wed",
+          "period": 3,
+          "span": 1,
+          "courseId": "BT31",
+          "room": "OL"
+        },
+        {
+          "weekday": "wed",
+          "period": 4,
+          "span": 1,
+          "courseId": "SK32",
+          "room": "OL"
+        },
+        {
+          "weekday": "wed",
+          "period": 5,
+          "span": 1,
+          "courseId": "FX31",
+          "room": "OL"
+        },
+        {
+          "weekday": "thu",
+          "period": 1,
+          "span": 2,
+          "courseId": "IH31",
+          "room": "285"
+        },
+        {
+          "weekday": "fri",
+          "period": 1,
+          "span": 2,
+          "courseId": "ST31",
+          "room": "121"
+        },
+        {
+          "weekday": "fri",
+          "period": 4,
+          "span": 2,
+          "courseId": "JV31",
+          "room": "332"
+        }
+      ]
     },
     {
       "id": "PI",
@@ -126,6 +225,13 @@
           "period": 3,
           "span": 2,
           "courseId": "NT29",
+          "room": "246"
+        },
+        {
+          "weekday": "mon",
+          "period": 5,
+          "span": 1,
+          "courseId": "IO26",
           "room": "246"
         },
         {
