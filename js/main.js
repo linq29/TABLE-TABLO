@@ -200,6 +200,8 @@ function renderSoloTimetable(selectedTimetable) {
         for (let offset = 1; offset < entry.span; offset += 1) {
           coveredCells.add(`${weekday.id}:${period.id + offset}`);
         }
+      } else {
+        td.classList.add("is-free");
       }
 
       row.append(td);
@@ -228,6 +230,10 @@ function renderCrewTimetable(selectedTimetables) {
           lessons.append(createLesson(entry, timetable));
         });
       });
+
+      if (!lessons.children.length) {
+        td.classList.add("is-free");
+      }
 
       td.append(lessons);
       row.append(td);

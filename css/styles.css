@@ -216,6 +216,10 @@ h1 {
   height: var(--timetable-row-height);
 }
 
+.timetable td.is-free {
+  background-color: #DBE0E5;
+}
+
 .period,
 .time,
 .subject,
