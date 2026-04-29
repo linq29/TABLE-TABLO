@@ -6,20 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2026年度 時間割表 Solo Mode</title>
   <link rel="icon" type="image/x-icon" href="favicon.png">
-  <link rel="stylesheet" href="css/styles-solo.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 </head>
 
-<body>
+<body data-mode="solo">
   <main class="sheet">
     <header class="sheet-header">
-      <p><span class="sheet-title">2026年度 時間割表</span></p>
-      <p><span class="sheet-meta" id="sheet-meta">Solo Mode / 担任：タカヒロ</span></p>
+      <div class="sheet-title-wrapper">
+        <h1 class="sheet-title">2026年度 時間割表</h1>
+        <span class="current-mode">Solo Mode</span>
+      </div>
+      <p><span class="sheet-meta" id="sheet-meta">担任：タカヒロ</span></p>
       <nav class="mode-nav" aria-label="表示モード">
-        <a href="index.html">Multi Mode</a>
+        <a href="index.html">→ Crew Mode</a>
       </nav>
     </header>
 
@@ -52,7 +55,7 @@
           target="_blank">Icogenix</a></strong> from <strong><a href="https://thenounproject.com/"
           target="_blank">Noun Project</a></strong>.</p>
   </footer>
-  <script src="js/main-solo.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 
 </html>

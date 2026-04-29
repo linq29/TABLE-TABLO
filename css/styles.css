@@ -3,9 +3,9 @@
   --fill: #0fa3df;
   --hal-dim: #abb8c3;
   --black: #1c1c1c;
-  --timetable-ih: #175bc7;
-  --timetable-pi: #0f8f6a;
-  --timetable-pw: #8b3fd6;
+  --timetable-ih: #d64045;
+  --timetable-pi: #175bc7;
+  --timetable-pw: #0f8f6a;
   --period-col-width: 5.5rem;
   --timetable-min-width: 760px;
 }
@@ -36,16 +36,36 @@ body {
 
 .sheet-header {
   text-align: left;
-  padding-bottom: 14px;
+  font-style: normal;
   font-weight: 700;
 }
 
-.sheet-title {
+.sheet-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h1 {
   font-size: 2rem;
-  background: linear-gradient(97deg, #175bc7 4%, #db13e0);
+  background: linear-gradient(97deg, var(--hal) 4%, #db13e0);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+
+  padding: 0;
+  margin: 0;
+}
+
+.current-mode {
+  display: inline-flex;
+  margin-left: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--hal);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
 }
 
 .sheet-meta {
@@ -63,7 +83,7 @@ body {
   top: 0;
   bottom: 0;
   width: 0.5rem;
-  background: linear-gradient(180deg, #175bc7 4%, #db13e0);
+  background: linear-gradient(180deg, var(--hal) 4%, #db13e0);
 }
 
 .mode-nav {
@@ -142,10 +162,22 @@ body {
 
 .timetable {
   border-collapse: collapse;
-  table-layout: fixed;
   margin-top: 1rem;
   width: 100%;
   min-width: var(--timetable-min-width);
+}
+
+[data-mode="crew"] .timetable {
+  table-layout: fixed;
+}
+
+[data-mode="solo"] .timetable {
+  table-layout: fixed;
+}
+
+[data-mode="solo"] .timetable thead th:not(.period-col),
+[data-mode="solo"] .timetable tbody td {
+  width: calc((100% - var(--period-col-width)) / 5);
 }
 
 .timetable th,
@@ -210,7 +242,40 @@ body {
   color: var(--hal-dim);
 }
 
-.lesson-stack {
+.lesson {
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson .detail {
+  margin-top: 0;
+}
+
+[data-mode="solo"] .lesson {
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+}
+
+[data-mode="solo"] .timetable td[rowspan="2"] > .lesson {
+  min-height: 172px;
+}
+
+[data-mode="solo"] .subject {
+  color: var(--hal);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+[data-mode="solo"] .detail {
+  color: var(--hal);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+[data-mode="crew"] .lesson-stack {
   display: grid;
   grid-template-rows: repeat(3, minmax(max-content, 1fr));
   gap: 0.35rem;
@@ -218,61 +283,55 @@ body {
   min-height: 100%;
 }
 
-.lesson {
+[data-mode="crew"] .lesson {
   --lesson-color: var(--timetable-ih);
-  display: flex;
-  flex-direction: column;
   gap: 0.25rem;
   align-items: stretch;
   justify-content: center;
   min-height: 0;
   padding: 0.35rem 0.4rem;
   border-left: 4px solid var(--lesson-color);
-  background: rgba(23, 91, 199, 0.08);
+  background: rgba(214, 64, 69, 0.08);
   text-align: left;
 }
 
-.lesson-ih {
+[data-mode="crew"] .lesson-ih {
   grid-row: 1;
   align-self: start;
 }
 
-.lesson-pi {
+[data-mode="crew"] .lesson-pi {
   --lesson-color: var(--timetable-pi);
   grid-row: 2;
   align-self: center;
-  background: rgba(15, 143, 106, 0.08);
+  background: rgba(23, 91, 199, 0.08);
 }
 
-.lesson-pw {
+[data-mode="crew"] .lesson-pw {
   --lesson-color: var(--timetable-pw);
   grid-row: 3;
   align-self: end;
-  background: rgba(139, 63, 214, 0.08);
+  background: rgba(15, 143, 106, 0.08);
 }
 
-.lesson-meta {
+[data-mode="crew"] .lesson-meta {
   display: flex;
   gap: 0.35rem;
   align-items: baseline;
 }
 
-.subject {
+[data-mode="crew"] .subject {
   color: var(--lesson-color);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.15;
 }
 
-.detail {
+[data-mode="crew"] .detail {
   color: var(--lesson-color);
   font-size: 0.78rem;
   line-height: 1.3;
   word-break: break-word;
-}
-
-.lesson .detail {
-  margin-top: 0;
 }
 
 .notes {
@@ -308,6 +367,28 @@ body {
   word-break: break-word;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  height: 0.75rem;
+  filter: grayscale(100%) opacity(50%);
+  margin-right: 0.5rem;
+}
+
+footer p {
+  text-align: center;
+  color: var(--hal-dim);
+  font-size: 0.75rem;
+}
+
+footer a {
+  color: var(--hal-dim);
+}
+
 @media (max-width: 900px) {
   body {
     padding: 0.75rem;
@@ -331,11 +412,19 @@ body {
     padding: 0.45rem;
   }
 
-  .subject {
+  [data-mode="solo"] .subject {
+    font-size: 1.1rem;
+  }
+
+  [data-mode="solo"] .detail {
+    font-size: 0.82rem;
+  }
+
+  [data-mode="crew"] .subject {
     font-size: 0.92rem;
   }
 
-  .detail {
+  [data-mode="crew"] .detail {
     font-size: 0.74rem;
   }
 }
@@ -375,26 +464,4 @@ body {
     flex-wrap: wrap;
     gap: 4px 12px;
   }
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-footer img {
-  height: 0.75rem;
-  filter: grayscale(100%) opacity(50%);;
-  margin-right: 0.5rem;
-}
-
-footer p {
-  text-align: center;
-  color: var(--hal-dim);
-  font-size: 0.75rem;
-}
-
-footer a {
-  color: var(--hal-dim);
 }

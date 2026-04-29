@@ -81,6 +81,18 @@ const head = document.querySelector("#timetable-head");
 const body = document.querySelector("#timetable-body");
 const options = document.querySelector("#timetable-options");
 const sheetMeta = document.querySelector("#sheet-meta");
+const currentMode = document.querySelector(".current-mode");
+const mode = document.body.dataset.mode === "solo" ? "solo" : "crew";
+const modeConfig = {
+  solo: {
+    inputType: "radio",
+    label: "Solo Mode"
+  },
+  crew: {
+    inputType: "checkbox",
+    label: "Crew Mode"
+  }
+};
 
 function getMaxSelectedTimetables() {
   return timetableData?.constraints?.maxSelectedTimetables || timetableData?.timetables?.length || 1;
@@ -88,6 +100,11 @@ function getMaxSelectedTimetables() {
 
 function getSelectedTimetableIds() {
   return [...options.querySelectorAll('input[name="timetable-view"]:checked')].map((input) => input.value);
+}
+
+function getSelectedTimetables() {
+  const selectedIds = getSelectedTimetableIds();
+  return timetableData.timetables.filter((timetable) => selectedIds.includes(timetable.id));
 }
 
 function createPeriodCell(period) {
@@ -105,23 +122,28 @@ function createPeriodCell(period) {
   return periodCell;
 }
 
-function createLesson(entry, timetable) {
+function createLesson(entry, timetable = null) {
   const lesson = document.createElement("div");
-  const meta = document.createElement("div");
-  const subject = document.createElement("span");
+  const subject = document.createElement(mode === "crew" ? "span" : "div");
   const detail = document.createElement("div");
 
-  lesson.className = `lesson lesson-${timetable.id.toLowerCase()}`;
+  lesson.className = timetable ? `lesson lesson-${timetable.id.toLowerCase()}` : "lesson";
 
-  meta.className = "lesson-meta";
   subject.className = "subject";
   subject.textContent = entry.courseId;
 
   detail.className = "detail";
   detail.textContent = entry.room;
 
-  meta.append(subject);
-  lesson.append(meta, detail);
+  if (mode === "crew") {
+    const meta = document.createElement("div");
+    meta.className = "lesson-meta";
+    meta.append(subject);
+    lesson.append(meta, detail);
+  } else {
+    lesson.append(subject, detail);
+  }
+
   return lesson;
 }
 
@@ -148,13 +170,49 @@ function findEntriesForCell(timetable, weekdayId, periodId) {
   });
 }
 
-function renderTimetable() {
-  const selectedIds = getSelectedTimetableIds();
-  const selectedTimetables = timetableData.timetables.filter((timetable) => selectedIds.includes(timetable.id));
+function findStartingEntry(timetable, weekdayId, periodId) {
+  return timetable.entries.find((entry) => entry.weekday === weekdayId && entry.period === periodId);
+}
 
-  renderMeta(selectedTimetables);
+function renderSoloTimetable(selectedTimetable) {
+  const coveredCells = new Set();
+
   renderHead();
   body.replaceChildren();
+  renderMeta([selectedTimetable]);
+
+  timetableData.periods.forEach((period) => {
+    const row = document.createElement("tr");
+    row.append(createPeriodCell(period));
+
+    timetableData.weekdays.forEach((weekday) => {
+      const key = `${weekday.id}:${period.id}`;
+      if (coveredCells.has(key)) {
+        return;
+      }
+
+      const td = document.createElement("td");
+      const entry = findStartingEntry(selectedTimetable, weekday.id, period.id);
+      if (entry) {
+        td.rowSpan = entry.span;
+        td.append(createLesson(entry));
+
+        for (let offset = 1; offset < entry.span; offset += 1) {
+          coveredCells.add(`${weekday.id}:${period.id + offset}`);
+        }
+      }
+
+      row.append(td);
+    });
+
+    body.append(row);
+  });
+}
+
+function renderCrewTimetable(selectedTimetables) {
+  renderHead();
+  body.replaceChildren();
+  renderMeta(selectedTimetables);
 
   timetableData.periods.forEach((period) => {
     const row = document.createElement("tr");
@@ -179,13 +237,30 @@ function renderTimetable() {
   });
 }
 
+function renderTimetable() {
+  const selectedTimetables = getSelectedTimetables();
+  const fallbackTimetable = timetableData.timetables[0];
+
+  if (mode === "solo") {
+    renderSoloTimetable(selectedTimetables[0] || fallbackTimetable);
+    return;
+  }
+
+  renderCrewTimetable(selectedTimetables);
+}
+
 function renderMeta(selectedTimetables) {
   const teachers = [...new Set(selectedTimetables.map((timetable) => timetable.teacher).filter(Boolean))];
-  sheetMeta.textContent = `Multi Mode / 担任：${teachers.join("・")}`;
+  currentMode.textContent = modeConfig[mode].label;
+  sheetMeta.textContent = `担任：${teachers.join("・")}`;
 }
 
 function renderOptions() {
-  const defaultSelectedIds = new Set(timetableData.defaultSelectedTimetableIds || [timetableData.timetables[0]?.id]);
+  const defaultIds = timetableData.defaultSelectedTimetableIds || [timetableData.timetables[0]?.id];
+  const modeDefaultIds = mode === "solo"
+    ? [defaultIds[0]]
+    : timetableData.timetables.slice(0, getMaxSelectedTimetables()).map((timetable) => timetable.id);
+  const defaultSelectedIds = new Set(modeDefaultIds);
 
   options.replaceChildren();
   timetableData.timetables.forEach((timetable) => {
@@ -194,7 +269,7 @@ function renderOptions() {
     const text = document.createElement("span");
 
     label.className = `timetable-option timetable-option-${timetable.id.toLowerCase()}`;
-    input.type = "checkbox";
+    input.type = modeConfig[mode].inputType;
     input.name = "timetable-view";
     input.value = timetable.id;
     input.checked = defaultSelectedIds.has(timetable.id);
@@ -206,6 +281,10 @@ function renderOptions() {
 }
 
 function enforceSelectionLimit(changedInput) {
+  if (mode === "solo") {
+    return;
+  }
+
   const selectedInputs = [...options.querySelectorAll('input[name="timetable-view"]:checked')];
   const maxSelected = getMaxSelectedTimetables();
 
