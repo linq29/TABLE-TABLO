@@ -5,8 +5,12 @@
     "coursePeriodSpan": {
       "min": 1,
       "max": 2
-    }
+    },
+    "maxSelectedTimetables": 3
   },
+  "defaultSelectedTimetableIds": [
+    "IH"
+  ],
   "weekdays": [
     {
       "id": "mon",
@@ -27,10 +31,6 @@
     {
       "id": "fri",
       "label": "金"
-    },
-    {
-      "id": "sat",
-      "label": "土"
     }
   ],
   "periods": [
@@ -75,68 +75,6 @@
       "start": "17:50",
       "end": "19:20",
       "durationMinutes": 90
-    }
-  ],
-  "courses": [
-    {
-      "id": "FX29",
-      "label": "FX29"
-    },
-    {
-      "id": "FX31",
-      "label": "FX31"
-    },
-    {
-      "id": "IH29",
-      "label": "IH29"
-    },
-    {
-      "id": "IH31",
-      "label": "IH31"
-    },
-    {
-      "id": "IO29",
-      "label": "IO29"
-    },
-    {
-      "id": "IO32",
-      "label": "IO32"
-    },
-    {
-      "id": "IP3S",
-      "label": "IP3S"
-    },
-    {
-      "id": "JV29",
-      "label": "JV29"
-    },
-    {
-      "id": "JV31",
-      "label": "JV31"
-    },
-    {
-      "id": "NT29",
-      "label": "NT29"
-    },
-    {
-      "id": "NT32",
-      "label": "NT32"
-    },
-    {
-      "id": "SK29",
-      "label": "SK29"
-    },
-    {
-      "id": "SK32",
-      "label": "SK32"
-    },
-    {
-      "id": "ST29",
-      "label": "ST29"
-    },
-    {
-      "id": "ST31",
-      "label": "ST31"
     }
   ],
   "timetables": [
@@ -288,7 +226,71 @@
     {
       "id": "PW",
       "label": "PW",
-      "entries": []
+      "entries": [
+        {
+          "weekday": "mon",
+          "period": 4,
+          "span": 1,
+          "courseId": "FX29",
+          "room": "296"
+        },
+        {
+          "weekday": "mon",
+          "period": 5,
+          "span": 1,
+          "courseId": "EW29",
+          "room": "296"
+        },
+        {
+          "weekday": "mon",
+          "period": 6,
+          "span": 1,
+          "courseId": "MD29",
+          "room": "296"
+        },
+        {
+          "weekday": "tue",
+          "period": 3,
+          "span": 1,
+          "courseId": "IP3S",
+          "room": "298"
+        },
+        {
+          "weekday": "tue",
+          "period": 4,
+          "span": 2,
+          "courseId": "IW29",
+          "room": "296"
+        },
+        {
+          "weekday": "wed",
+          "period": 4,
+          "span": 2,
+          "courseId": "PH29",
+          "room": "334"
+        },
+        {
+          "weekday": "thu",
+          "period": 1,
+          "span": 2,
+          "courseId": "IW29",
+          "room": "285"
+        },
+        {
+          "weekday": "thu",
+          "period": 4,
+          "span": 2,
+          "courseId": "FD29",
+          "room": "334"
+        },
+        {
+          "weekday": "fri",
+          "period": 1,
+          "span": 2,
+          "courseId": "WB29",
+          "room": "OL"
+        }
+      ]
     }
   ]
 }

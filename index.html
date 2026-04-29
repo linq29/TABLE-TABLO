@@ -20,14 +20,10 @@
       <p><span class="sheet-meta">担任：タカヒロ・ショウコ</span></p>
     </header>
 
-    <div class="timetable-switch">
-      <span class="switch-label">IH</span>
-      <label class="switch-control">
-        <input type="checkbox" id="timetable-toggle" aria-label="IHとPIを切り替え">
-        <span class="switch-track"></span>
-      </label>
-      <span class="switch-label">PI</span>
-    </div>
+    <fieldset class="timetable-picker" aria-label="時間割を選択">
+      <!-- <legend>時間割</legend> -->
+      <div id="timetable-options" class="timetable-options"></div>
+    </fieldset>
 
     <table class="timetable">
       <thead>
