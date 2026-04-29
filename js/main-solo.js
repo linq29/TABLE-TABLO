@@ -19,6 +19,7 @@ const timetableData = {
     {
       id: "IH",
       label: "IH",
+      teacher: "タカヒロ",
       entries: [
         { weekday: "mon", period: 3, span: 2, courseId: "NT32", room: "246" },
         { weekday: "mon", period: 5, span: 1, courseId: "IO32", room: "246" },
@@ -35,6 +36,7 @@ const timetableData = {
     {
       id: "PI",
       label: "PI",
+      teacher: "タカヒロ",
       entries: [
         { weekday: "mon", period: 3, span: 2, courseId: "NT29", room: "246" },
         { weekday: "mon", period: 5, span: 1, courseId: "IO26", room: "246" },
@@ -50,6 +52,7 @@ const timetableData = {
     {
       id: "PW",
       label: "PW",
+      teacher: "ショウコ",
       entries: [
         { weekday: "mon", period: 4, span: 1, courseId: "FX29", room: "296" },
         { weekday: "mon", period: 5, span: 1, courseId: "EW29", room: "296" },
@@ -68,6 +71,7 @@ const timetableData = {
 const head = document.querySelector("#timetable-head");
 const body = document.querySelector("#timetable-body");
 const options = document.querySelector("#timetable-options");
+const sheetMeta = document.querySelector("#sheet-meta");
 
 function createPeriodCell(period) {
   const periodCell = document.createElement("th");
@@ -125,7 +129,7 @@ function renderTimetable(timetableId) {
 
   renderHead();
   body.replaceChildren();
-  document.documentElement.dataset.timetable = timetable.id.toLowerCase();
+  renderMeta(timetable);
 
   timetableData.periods.forEach((period) => {
     const row = document.createElement("tr");
@@ -153,6 +157,10 @@ function renderTimetable(timetableId) {
 
     body.append(row);
   });
+}
+
+function renderMeta(timetable) {
+  sheetMeta.textContent = `Solo Mode / 担任：${timetable.teacher}`;
 }
 
 function renderOptions() {

@@ -81,6 +81,7 @@
     {
       "id": "IH",
       "label": "IH",
+      "teacher": "タカヒロ",
       "entries": [
         {
           "weekday": "mon",
@@ -157,6 +158,7 @@
     {
       "id": "PI",
       "label": "PI",
+      "teacher": "タカヒロ",
       "entries": [
         {
           "weekday": "mon",
@@ -226,6 +228,7 @@
     {
       "id": "PW",
       "label": "PW",
+      "teacher": "ショウコ",
       "entries": [
         {
           "weekday": "mon",

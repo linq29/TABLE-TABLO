@@ -28,6 +28,7 @@ const timetableData = {
     {
       id: "IH",
       label: "IH",
+      teacher: "タカヒロ",
       entries: [
         { weekday: "mon", period: 3, span: 2, courseId: "NT32", room: "246" },
         { weekday: "mon", period: 5, span: 1, courseId: "IO32", room: "246" },
@@ -44,6 +45,7 @@ const timetableData = {
     {
       id: "PI",
       label: "PI",
+      teacher: "タカヒロ",
       entries: [
         { weekday: "mon", period: 3, span: 2, courseId: "NT29", room: "246" },
         { weekday: "mon", period: 5, span: 1, courseId: "IO26", room: "246" },
@@ -59,6 +61,7 @@ const timetableData = {
     {
       id: "PW",
       label: "PW",
+      teacher: "ショウコ",
       entries: [
         { weekday: "mon", period: 4, span: 1, courseId: "FX29", room: "296" },
         { weekday: "mon", period: 5, span: 1, courseId: "EW29", room: "296" },
@@ -77,6 +80,7 @@ const timetableData = {
 const head = document.querySelector("#timetable-head");
 const body = document.querySelector("#timetable-body");
 const options = document.querySelector("#timetable-options");
+const sheetMeta = document.querySelector("#sheet-meta");
 
 function getMaxSelectedTimetables() {
   return timetableData?.constraints?.maxSelectedTimetables || timetableData?.timetables?.length || 1;
@@ -148,6 +152,7 @@ function renderTimetable() {
   const selectedIds = getSelectedTimetableIds();
   const selectedTimetables = timetableData.timetables.filter((timetable) => selectedIds.includes(timetable.id));
 
+  renderMeta(selectedTimetables);
   renderHead();
   body.replaceChildren();
 
@@ -172,6 +177,11 @@ function renderTimetable() {
 
     body.append(row);
   });
+}
+
+function renderMeta(selectedTimetables) {
+  const teachers = [...new Set(selectedTimetables.map((timetable) => timetable.teacher).filter(Boolean))];
+  sheetMeta.textContent = `Multi Mode / 担任：${teachers.join("・")}`;
 }
 
 function renderOptions() {
