@@ -7,7 +7,9 @@
   --timetable-pi: #175bc7;
   --timetable-pw: #0f8f6a;
   --period-col-width: 5.5rem;
+
   --timetable-min-width: 760px;
+  --timetable-row-height: 4rem;
 }
 
 * {
@@ -206,12 +208,12 @@ h1 {
 }
 
 .timetable tbody tr {
-  height: 96px;
+  height: var(--timetable-row-height);
 }
 
 .timetable td {
   min-width: 4em;
-  height: 96px;
+  height: var(--timetable-row-height);
 }
 
 .period,
