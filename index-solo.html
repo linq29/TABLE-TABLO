@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026年度 時間割表</title>
+  <title>2026年度 時間割表 Solo Mode</title>
   <link rel="icon" type="image/x-icon" href="favicon.png">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,21 +13,20 @@
     rel="stylesheet">
 </head>
 
-<body data-mode="crew">
+<body data-mode="solo">
   <main class="sheet">
     <header class="sheet-header">
       <div class="sheet-title-wrapper">
         <h1 class="sheet-title">2026年度 時間割表</h1>
-        <span class="current-mode">Crew Mode</span>
+        <span class="current-mode">Solo Mode</span>
       </div>
-      <p><span class="sheet-meta" id="sheet-meta"></span></p>
+      <p><span class="sheet-meta" id="sheet-meta">担任：タカヒロ</span></p>
       <nav class="mode-nav" aria-label="表示モード">
-        <a href="index-solo.html">→ Solo Mode</a>
+        <a href="index.html">→ Crew Mode</a>
       </nav>
     </header>
 
     <fieldset class="timetable-picker" aria-label="時間割を選択">
-      <!-- <legend>時間割</legend> -->
       <div id="timetable-options" class="timetable-options"></div>
     </fieldset>
 
@@ -51,8 +50,10 @@
     </section>
   </main>
   <footer>
-  <img src="favicon.png" alt="Icon by Icogenix">
-  <p>Icon created by <strong><a href="https://thenounproject.com/creator/asmahameed743/" target="_blank">Icogenix</a></strong> from <strong><a href="https://thenounproject.com/" target="_blank">Noun Project</a></strong>.</p>
+    <img src="favicon.png" alt="Icon by Icogenix">
+    <p>Icon created by <strong><a href="https://thenounproject.com/creator/asmahameed743/"
+          target="_blank">Icogenix</a></strong> from <strong><a href="https://thenounproject.com/"
+          target="_blank">Noun Project</a></strong>.</p>
   </footer>
   <script src="js/main.js" defer></script>
 </body>
