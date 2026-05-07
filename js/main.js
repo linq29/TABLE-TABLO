@@ -314,6 +314,78 @@ function bindOptions() {
   });
 }
 
+function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text).catch(() => copyTextWithTextarea(text));
+  }
+
+  return copyTextWithTextarea(text);
+}
+
+function copyTextWithTextarea(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+
+  return Promise.resolve();
+}
+
+function showCopyFeedback(target) {
+  const noteItem = target.closest(".notes li");
+  const button = target.matches(".note-copy-button")
+    ? target
+    : noteItem?.querySelector(target.matches(".note-id-value") ? ".note-id-copy" : ".note-pw-copy");
+
+  if (!button) {
+    return;
+  }
+
+  button.textContent = "COPIED";
+  window.setTimeout(() => {
+    button.textContent = "COPY";
+  }, 1200);
+}
+
+function handleNoteCopy(target) {
+  const copyTarget = target.closest("[data-copy-value]");
+
+  if (!copyTarget) {
+    return;
+  }
+
+  copyText(copyTarget.dataset.copyValue).then(() => {
+    showCopyFeedback(copyTarget);
+  });
+}
+
+function bindNotesCopy() {
+  const notes = document.querySelector(".notes");
+
+  if (!notes) {
+    return;
+  }
+
+  notes.addEventListener("click", (event) => {
+    handleNoteCopy(event.target);
+  });
+
+  notes.addEventListener("keydown", (event) => {
+    if (!event.target.matches(".note-copy-value") || !["Enter", " "].includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+    handleNoteCopy(event.target);
+  });
+}
+
 renderOptions();
 bindOptions();
+bindNotesCopy();
 renderTimetable();

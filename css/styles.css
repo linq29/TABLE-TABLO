@@ -163,7 +163,10 @@ h1 {
 }
 
 .timetable {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top: 1px solid var(--hal);
+  border-left: 1px solid var(--hal);
   margin-top: 1rem;
   width: 100%;
   min-width: var(--timetable-min-width);
@@ -184,7 +187,8 @@ h1 {
 
 .timetable th,
 .timetable td {
-  border: 1px solid var(--hal);
+  border-right: 1px solid var(--hal);
+  border-bottom: 1px solid var(--hal);
   text-align: center;
   vertical-align: middle;
   padding: 0.5rem;
@@ -197,9 +201,19 @@ h1 {
 
 .period-col,
 .timetable tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: white;
+  border-left: 1px solid var(--hal);
+  border-right: 1px solid var(--hal);
   width: var(--period-col-width);
   min-width: var(--period-col-width);
   max-width: var(--period-col-width);
+}
+
+.period-col {
+  z-index: 3;
 }
 
 .timetable tbody th {
@@ -358,19 +372,87 @@ h1 {
 }
 
 .notes li {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 4rem max-content minmax(10.5rem, max-content) 3.75rem max-content minmax(5rem, max-content) 3.75rem;
+  gap: 0.35rem 0.55rem;
   align-items: baseline;
   font-weight: 700;
 }
 
-.note-code {
-  min-width: 4rem;
+.notes li + li {
+  margin-top: 0.45rem;
 }
 
-.note-text,
-.note-pwd {
+.note-code {
+  grid-column: 1;
+}
+
+.note-label {
+  color: var(--hal-dim);
+}
+
+.note-id-label {
+  grid-column: 2;
+}
+
+.note-id-value {
+  grid-column: 3;
+}
+
+.note-id-copy {
+  grid-column: 4;
+  justify-self: start;
+}
+
+.note-pw-label {
+  grid-column: 5;
+}
+
+.note-pw-value {
+  grid-column: 6;
+  width: 6rem;
+}
+
+.note-pw-copy {
+  grid-column: 7;
+  justify-self: start;
+}
+
+.note-copy-value {
+  cursor: pointer;
+  color: var(--hal);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
   word-break: break-word;
+}
+
+.note-copy-value:focus-visible,
+.note-copy-button:focus-visible {
+  outline: 2px solid var(--hal);
+  outline-offset: 2px;
+}
+
+.note-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: var(--hal);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.70rem;
+  font-weight: 700;
+  min-width: 3.75rem;
+  padding: 0.2rem 0.35rem;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.note-copy-button:hover {
+  color: white;
+  background: var(--hal);
 }
 
 footer {
@@ -467,7 +549,44 @@ footer a {
   }
 
   .notes li {
-    flex-wrap: wrap;
-    gap: 4px 12px;
+    grid-template-columns: 4rem max-content max-content 3.75rem;
+    gap: 0.35rem 1rem;
+    align-items: baseline;
+  }
+
+  .note-code {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: start;
+  }
+
+  .note-id-label {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .note-id-value {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .note-id-copy {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .note-pw-label {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .note-pw-value {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .note-pw-copy {
+    grid-column: 4;
+    grid-row: 2;
   }
 }
