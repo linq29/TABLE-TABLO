@@ -21,9 +21,14 @@
         <span class="current-mode">Crew Mode</span>
       </div>
       <p><span class="sheet-meta" id="sheet-meta"></span></p>
-      <nav class="mode-nav" aria-label="表示モード">
-        <a href="index-solo.html">→ Solo Mode</a>
-      </nav>
+      <div class="mode-toggle">
+        <span id="crew-mode-label">Crew Mode</span>
+        <label class="mode-switch" aria-label="Solo ModeとCrew Modeを切り替え">
+          <input type="checkbox" id="mode-toggle" aria-labelledby="crew-mode-label solo-mode-label">
+          <span class="mode-switch-track"></span>
+        </label>
+        <span id="solo-mode-label">Solo Mode</span>
+      </div>
     </header>
 
     <fieldset class="timetable-picker" aria-label="時間割を選択">

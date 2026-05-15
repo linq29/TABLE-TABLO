@@ -43,8 +43,7 @@ GitHub Pages で簡単にデプロイできるよう、v1 は以下のシンプ�
 
 ## ディレクトリ概要（v1）
 
-- `index.html` : Crew Mode 画面
-- `index-solo.html` : Solo Mode 画面
+- `index.html` : Solo Mode / Crew Mode を切り替える時間割画面
 - `css/` : スタイル
 - `js/` : 表示・操作ロジック
 - `data/` : 時間割データ / 会議コードデータ（JSON）

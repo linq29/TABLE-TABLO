@@ -82,7 +82,8 @@ const body = document.querySelector("#timetable-body");
 const options = document.querySelector("#timetable-options");
 const sheetMeta = document.querySelector("#sheet-meta");
 const currentMode = document.querySelector(".current-mode");
-const mode = document.body.dataset.mode === "solo" ? "solo" : "crew";
+const modeToggle = document.querySelector("#mode-toggle");
+let mode = document.body.dataset.mode === "solo" ? "solo" : "crew";
 const modeConfig = {
   solo: {
     inputType: "radio",
@@ -93,6 +94,10 @@ const modeConfig = {
     label: "Crew Mode"
   }
 };
+const modeSelections = {
+  solo: [],
+  crew: []
+};
 
 function getMaxSelectedTimetables() {
   return timetableData?.constraints?.maxSelectedTimetables || timetableData?.timetables?.length || 1;
@@ -100,6 +105,11 @@ function getMaxSelectedTimetables() {
 
 function getSelectedTimetableIds() {
   return [...options.querySelectorAll('input[name="timetable-view"]:checked')].map((input) => input.value);
+}
+
+function getValidTimetableIds(ids) {
+  const validIds = new Set(timetableData.timetables.map((timetable) => timetable.id));
+  return ids.filter((id) => validIds.has(id));
 }
 
 function getSelectedTimetables() {
@@ -258,15 +268,37 @@ function renderTimetable() {
 function renderMeta(selectedTimetables) {
   const teachers = [...new Set(selectedTimetables.map((timetable) => timetable.teacher).filter(Boolean))];
   currentMode.textContent = modeConfig[mode].label;
-  sheetMeta.textContent = `担任：${teachers.join("・")}`;
+  sheetMeta.textContent = teachers.length ? `担任：${teachers.join("・")}` : "";
 }
 
-function renderOptions() {
+function getDefaultSelectedIds() {
   const defaultIds = timetableData.defaultSelectedTimetableIds || [timetableData.timetables[0]?.id];
-  const modeDefaultIds = mode === "solo"
+  return mode === "solo"
     ? [defaultIds[0]]
     : timetableData.timetables.slice(0, getMaxSelectedTimetables()).map((timetable) => timetable.id);
-  const defaultSelectedIds = new Set(modeDefaultIds);
+}
+
+function getSelectedIdsForMode(previousSelectedIds = []) {
+  const validPreviousIds = getValidTimetableIds(previousSelectedIds);
+
+  if (mode === "solo") {
+    return [validPreviousIds[0] || getDefaultSelectedIds()[0]].filter(Boolean);
+  }
+
+  const maxSelected = getMaxSelectedTimetables();
+  return (validPreviousIds.length ? validPreviousIds : getDefaultSelectedIds()).slice(0, maxSelected);
+}
+
+function syncModeToggle() {
+  document.body.dataset.mode = mode;
+
+  if (modeToggle) {
+    modeToggle.checked = mode === "solo";
+  }
+}
+
+function renderOptions(selectedIds = getDefaultSelectedIds()) {
+  const defaultSelectedIds = new Set(getSelectedIdsForMode(selectedIds));
 
   options.replaceChildren();
   timetableData.timetables.forEach((timetable) => {
@@ -310,6 +342,22 @@ function bindOptions() {
     }
 
     enforceSelectionLimit(event.target);
+    modeSelections[mode] = getSelectedTimetableIds();
+    renderTimetable();
+  });
+}
+
+function bindModeToggle() {
+  if (!modeToggle) {
+    return;
+  }
+
+  modeToggle.addEventListener("change", () => {
+    modeSelections[mode] = getSelectedTimetableIds();
+    mode = modeToggle.checked ? "solo" : "crew";
+    syncModeToggle();
+    renderOptions(modeSelections[mode]);
+    modeSelections[mode] = getSelectedTimetableIds();
     renderTimetable();
   });
 }
@@ -385,7 +433,10 @@ function bindNotesCopy() {
   });
 }
 
+syncModeToggle();
 renderOptions();
+modeSelections[mode] = getSelectedTimetableIds();
+bindModeToggle();
 bindOptions();
 bindNotesCopy();
 renderTimetable();
